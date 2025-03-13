@@ -4,12 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 import java.util.Date;
-@Entity @AllArgsConstructor @NoArgsConstructor
+@Entity @AllArgsConstructor @NoArgsConstructor @ToString @Getter @Setter
 public class Patient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

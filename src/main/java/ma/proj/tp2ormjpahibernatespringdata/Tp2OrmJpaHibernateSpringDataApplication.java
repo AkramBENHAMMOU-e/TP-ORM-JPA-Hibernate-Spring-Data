@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class Tp2OrmJpaHibernateSpringDataApplication {
@@ -26,6 +28,37 @@ public class Tp2OrmJpaHibernateSpringDataApplication {
             patientRepository.save(p2);
             patientRepository.save(p3);
             patientRepository.save(p4);
+            List<Patient> patients = patientRepository.findAll();
+            System.out.println("Liste des patients : ");
+            for (Patient patient : patients) {
+                System.out.println(patient.toString());
+            }
+            System.out.println("*".repeat(50));
+            System.out.println("Patient par ID : ");
+            Optional patient = patientRepository.findById(1L);
+            System.out.println(patient.toString());
+            System.out.println("*".repeat(50));
+            System.out.println("Patient par Nom : ");
+            Patient patientByNom = patientRepository.findByNomContains("Hassan");
+            System.out.println(patientByNom.toString());
+            System.out.println("*".repeat(50));
+            System.out.println("Update Patient : ");
+            Patient patientToUpdate = patientRepository.findById(1L).get();
+            System.out.println("patient before update"+patientToUpdate.toString());
+            patientToUpdate.setNom("Hassan Updated");
+            patientRepository.save(patientToUpdate);
+
+            System.out.println("patient after update"+patientToUpdate.toString());
+
+            System.out.println("*".repeat(50));
+            System.out.println("Delete Patient : ");
+            patientRepository.deleteById(1L);
+            List<Patient> patientsAfterDelete = patientRepository.findAll();
+            System.out.println("Liste des patients après suppression : ");
+            for (Patient patientAfterDelete : patientsAfterDelete) {
+                System.out.println(patientAfterDelete.toString());
+            }
+
         };
     }
 
